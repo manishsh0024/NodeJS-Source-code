@@ -1,0 +1,9 @@
+[
+    {"name":"Manish","age":24,"Cource":"NodeJs"},
+    {"name":"Naresh","age":26,"Cource":"Reactjs"},
+    {"name":"Kuldeep","age":22,"Cource":"MERN"},
+    {"name":"Naveen","age":21,"Cource":"Node"},
+    {"name":"Dhalla","age":21,"Cource":"WEB APP"},
+    {"name":"AAtish","age":23,"Cource":"WEB"},
+    {"name":"Karan","age":24,"Cource":"DSA"}
+]

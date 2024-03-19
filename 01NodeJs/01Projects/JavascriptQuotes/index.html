@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Card</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="card">
+        <div id="icons">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #10B981; font-size: 1.5rem;">
+                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"></path>
+            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #3B82F6; font-size: 1.25rem;" id="tweet">
+                <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
+            </svg>
+        </div>
+        <p id="quote"></p>
+        <p id="author"></p>
+        <button id="btn">New Quotes</button>
+    </div>
+
+
+
+    <script>
+        const quote = document.getElementById("quote");
+        const author = document.getElementById("author");
+        const btn = document.getElementById("btn");
+        const sharebtn = document.getElementById("tweet");
+        let realdata = "";
+
+        const getnewQuotes = () =>{
+            const rnum = Math.floor(Math.random()*10);
+            quote.innerHTML = `${realdata[rnum].text}`;
+            author.innerHTML = `${realdata[rnum].author}`;
+        };
+
+        btn.addEventListener("click", getnewQuotes);
+
+        const shared = () => {
+            // const tweetText = encodeURIComponent(quote.innerText + " - " + author.innerText);
+            const tweetText = encodeURIComponent(quote.innerText);
+            const tweetpost = `https://twitter.com/intent/tweet/?text=${tweetText}`;
+            window.open(tweetpost);
+        };
+
+        sharebtn.addEventListener("click",shared);
+
+        const getQuotes = async()=>{
+            const api = "https://type.fit/api/quotes";
+            try{
+                let data = await fetch(api);
+                realdata = await data.json();
+                // quote.innerHTML = `${realdata[14].text}`;
+                // author.innerHTML = `${realdata[14].author}`;
+                getnewQuotes();
+            }catch(error){}
+        }
+        getQuotes();
+
+    </script>
+</body>
+</html>
